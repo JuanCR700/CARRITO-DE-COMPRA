@@ -57,3 +57,54 @@ footer {
     margin-top: 20px;
     font-size: 0.9em;
 }
+
+/* seccion de productos */
+#productos {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+}
+
+/* lista de productos */
+#lista-productos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* cajas de productos */
+.producto {
+    text-align: center;
+    padding: 15px;
+    background: #fff5e1;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* imagenes de productos */
+.producto img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 5%;
+    margin-bottom: 10px;
+}
+
+/* botones */
+button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #e63900;
+}
+
