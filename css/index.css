@@ -102,9 +102,133 @@ button {
     border-radius: 5px;
     margin-top: 10px;
     font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
     background-color: #e63900;
+    transform: scale(1.05);
 }
+
+/* Estilos para el formulario dentro del modal */
+#formPago {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#formPago input {
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#formPago button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#formPago button:hover {
+    background-color: #e63900;
+}
+
+
+/* Estilos para el modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    right: -100%;
+    transform: translateY(-50%);
+    width: 300px;
+    background: white;
+    box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    transition: right 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+/* Cuando el modal está activo (visible) */
+.modal.show {
+    right: 20px;
+}
+
+/* Botón de cerrar */
+.modal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Para que modales no interfieran con la interacción */
+.modal-content {
+    position: relative;
+}
+
+/* Animación de shake */
+.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+/* Aplicar el zoom al pasar el mouse */
+.producto {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Efecto de zoom al pasar el mouse */
+.producto:hover {
+    transform: scale(1.05);
+}
+
+/* Animación de zoom */
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* Mensajes emergentes */
+.mensaje {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    z-index: 2000;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #lista-productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    #lista-productos {
+        grid-template-columns: 1fr;
+    }
+}
+
 
