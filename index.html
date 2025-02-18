@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
     <link rel="stylesheet" href="css/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="js/index.js"></script>
 </head>
 
 <body>
@@ -19,53 +22,103 @@
             <div id="lista-productos">
                 <div class="producto">
                     <img src="img/1.jpg" alt="Articulo1">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$70</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="1" data-precio="70">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/2.jpg" alt="Articulo2">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$70</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="2" data-precio="70">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/3.jpg" alt="Articulo3">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$70</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="3" data-precio="70">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/4.jpg" alt="Articulo4">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$45</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="4" data-precio="45">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/5.jpg" alt="Articulo5">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$70</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="5" data-precio="70">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/6.jpg" alt="Articulo6">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$35</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="6" data-precio="35">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/7.jpg" alt="Articulo7">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$35</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="7" data-precio="35">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/8.jpg" alt="Articulo8">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$35</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="8" data-precio="35">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/9.jpg" alt="Articulo9">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$70</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="9" data-precio="70">Agregar al carrito</button>
                 </div>
                 <div class="producto">
                     <img src="img/10.jpg" alt="Articulo10">
-                    <p>$</p>
-                    <button>Agregar al carrito</button>
+                    <p>$70</p>
+                    <div class="cantidad-container">
+                        <button class="restar">−</button>
+                        <span class="cantidad">1</span>
+                        <button class="sumar">+</button>
+                    </div>
+                    <button class="agregar" data-id="10" data-precio="70">Agregar al carrito</button>
                 </div>
             </div>
         </section>
@@ -77,7 +130,7 @@
                 <h3>Síguenos en las redes sociales</h3>
                 <ul>
                     <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
-                    <li><a href="https:/www.twitter.com" target="_blank">Twitter</a></li>
+                    <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
                     <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
                 </ul>
                 <p class="copyright">© 2025 Actividad 1 DPS. Todos los derechos reservados.</p>
