@@ -33,54 +33,71 @@ document.addEventListener("DOMContentLoaded", () => {
     // Botón para abrir el modal del carrito
     verCarritoBtn.addEventListener("click", () => {
         let carritoHTML = carrito.map(producto => `
-            <div class="producto-carrito">
-                <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-pequena">
-                <p>${producto.nombre}</p>
-                <p>Precio: $${producto.precio}</p>
-                <p>Total: $${producto.total}</p>
-                <div class="cantidad-control">
-                    <button class="disminuir" data-id="${producto.id}">-</button>
-                    <span class="cantidad">${producto.cantidad}</span>
-                    <button class="aumentar" data-id="${producto.id}">+</button>
-                </div>
-                <button class="eliminar" data-id="${producto.id}">Eliminar</button>
-            </div>
+            <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;">
+                    <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-pequena" style="width: 50px; height: 50px;">
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;">${producto.nombre}</td>
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;">$${producto.precio}</td>
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;">
+                    <div class="cantidad-control" style="display: flex; align-items: center; justify-content: center;">
+                        <button class="disminuir btn btn-sm btn-outline-secondary" data-id="${producto.id}">-</button>
+                        <span class="cantidad" style="margin: 0 10px;">${producto.cantidad}</span>
+                        <button class="aumentar btn btn-sm btn-outline-secondary" data-id="${producto.id}">+</button>
+                    </div>
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #ccc;">
+                    <button class="eliminar btn btn-sm btn-danger" data-id="${producto.id}" title="Eliminar">X</button>
+                </td>
+            </tr>
         `).join("");
 
         let totalGeneral = carrito.reduce((acc, prod) => acc + prod.total, 0);
 
         if (carrito.length === 0) {
             Swal.fire({
-            title: 'Carrito Vacío',
-            text: 'No hay productos en el carrito para generar una factura.',
-            icon: 'warning',
-            confirmButtonText: 'Aceptar'
+                title: 'Carrito Vacío',
+                text: 'No hay productos en el carrito para generar una factura.',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar'
             });
         } else {
             Swal.fire({
-            title: 'Carrito de Compras',
-            html: `
-            <div class="carrito-container">
-                ${carritoHTML}
-                <h3>Total: $${totalGeneral}</h3>
-            </div>
-            `,
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText: 'Generar Factura',
-            cancelButtonText: 'Seguir Comprando'
+                title: 'Carrito de Compras',
+                html: `
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr>
+                                <th style="border-bottom: 1px solid #ccc; padding: 10px;">Imagen</th>
+                                <th style="border-bottom: 1px solid #ccc; padding: 10px;">Nombre</th>
+                                <th style="border-bottom: 1px solid #ccc; padding: 10px;">Precio Unitario</th>
+                                <th style="border-bottom: 1px solid #ccc; padding: 10px;">Cantidad</th>
+                                <th style="border-bottom: 1px solid #ccc; padding: 10px;">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${carritoHTML}
+                        </tbody>
+                    </table>
+                    <h3 style="margin-top: 20px;">Total: $${totalGeneral}</h3>
+                `,
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText: 'Generar Factura',
+                cancelButtonText: 'Seguir Comprando',
+                width: '700px'
             }).then((result) => {
-            if (result.isConfirmed) {
-                generarFactura();
-            }
+                if (result.isConfirmed) {
+                    generarFactura();
+                }
             });
         }
 
         // Botones de eliminar para cada producto dentro del SweetAlert
         document.querySelectorAll(".eliminar").forEach(btn => {
             btn.addEventListener("click", (event) => {
-                const id = event.target.getAttribute("data-id");
+                const id = event.currentTarget.getAttribute("data-id");
                 Swal.fire({
                     title: '¿Está seguro?',
                     text: 'Desea eliminar este producto del carrito.',
@@ -175,7 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (producto) {
                         producto.cantidad += cantidad;
                     } else {
-                        carrito.push({ id, nombre, cantidad, precio, total: cantidad * precio });
+                        const imagen = productoDiv.querySelector("img").src;
+                        carrito.push({ id, nombre, cantidad, precio, imagen, total: cantidad * precio });
                     }
                     actualizarCarrito();
                     Swal.fire(
