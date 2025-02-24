@@ -1,49 +1,50 @@
 # 🎮 Carrito de Compras UDB 🎮
 
 ## 🛍️ Descripción
-¡Bienvenido al increíble mundo del **Carrito de Compras UDB**! Esta es una aplicación web de ensueño que transforma tu experiencia de compra en línea. Agrega productos al carrito, ajusta cantidades, elimina productos, genera una factura y realiza un pago simulado con un solo clic. ¡Compra feliz!
+Este proyecto es una aplicación web que simula un carrito de compras para una tienda en línea. Permite a los usuarios agregar productos al carrito, ajustar cantidades, eliminar productos, generar una factura y realizar un pago simulado.
 
 ## 🗂️ Archivos Principales
-- **`index.html`**: La columna vertebral de nuestra página, con toda la estructura HTML.
-- **`index.js`**: La magia detrás de la lógica del carrito de compras, ¡gracias JavaScript!
-- **`index.css`**: El estilista de la página, encargado de los toques CSS.
+- **`index.html`**: Contiene la estructura HTML de la página.
+- **`index.js`**:  Contiene la lógica de JavaScript para manejar el carrito de compras.
+- **`index.css`**: Contiene los estilos CSS para la página.
 
 ## 📚 Librerías Externas
-- **jQuery**: El asistente DOM que todos necesitamos.
-- **SweetAlert2**: Porque las alertas y modales personalizados son vida.
+- **jQuery**: Utilizado para simplificar la manipulación del DOM.
+- **SweetAlert2**: Utilizado para mostrar alertas y modales personalizados.
 
 ## 🛠️ Funcionalidades Principales
 
 ### 🛒 Agregar Productos al Carrito
 - Los usuarios pueden agregar productos al carrito con un simple clic en el botón "Agregar al carrito".
-- SweetAlert2 nos muestra una confirmación antes de que el producto se sume a la fiesta.
+- SweetAlert2 nos muestra una confirmación antes de que el producto se agregue.
 
 ### 📈 Ajustar Cantidades
-- ¡Más o menos! Ajusta la cantidad de cada producto antes de agregarlo al carrito.
+- Los usuarios pueden aumentar o disminuir la cantidad de cada producto antes de agregarlo al carrito.
 
 ### 🛍️ Ver Carrito
-- Un clic en el botón "Ver Carrito" y ¡voilà! un modal con todos los productos agregados, cantidades, precios y la opción de eliminar.
+- Los usuarios pueden ver el contenido del carrito haciendo clic en el botón "Ver Carrito".
+Se muestra un modal con los productos agregados, sus cantidades, precios y la opción de eliminar productos.
 
 ### 🧾 Generar Factura
-- ¿Quieres ver cuánto debes? Genera una factura detallada con el total a pagar.
+- Los usuarios pueden generar una factura que muestra el detalle de los productos y el total a pagar.
 
 ### 💳 Realizar Pago
-- Selecciona tu método de pago (tarjeta de crédito/débito o criptomonedas) y completa el proceso de pago simulado con estilo.
+- Los usuarios pueden seleccionar un método de pago (tarjeta de crédito/débito o criptomonedas) y completar el proceso de pago simulado.
 
 ## ⚙️ Detalles Técnicos
 
 ### 📝 HTML
-- La estructura HTML está organizada en secciones elegantes como el **header**, **main** y **footer**.
-- Los modales (`modal`) nos permiten mostrar el carrito, la factura y el formulario de pago.
+- La estructura HTML está organizada en secciones como el encabezado (header), el contenido principal (main) y el pie de página (footer).
+- Se utilizan modales (modal) para mostrar el carrito, la factura y el formulario de pago.
 
 ### 🎨 CSS
-- Los estilos están en el archivo `index.css`, haciendo que todo luzca perfecto.
+- Los estilos están enlazados en el archivo index.css y se aplican a los elementos HTML para dar formato a la página.
 
 ### 💻 JavaScript
-- **Manejo del Carrito**: Utilizamos un array `carrito` para almacenar los productos agregados.
-- **Event Listeners**: Gestionamos los clics en los botones de agregar, eliminar, aumentar y disminuir cantidades.
-- **SweetAlert2**: Alertas y modales personalizados para confirmaciones, facturas y pagos.
+- **Manejo del Carrito**: Se utiliza un array carrito para almacenar los productos agregados.
+- **Event Listeners**: Se utilizan para manejar los clics en los botones de agregar, eliminar, aumentar y disminuir cantidades.
+- **SweetAlert2**: Se utiliza para mostrar alertas y modales personalizados, como la confirmación de agregar productos, la generación de facturas y el proceso de pago..
 
 ---
 
-¡Esperamos que disfrutes usando **Carrito de Compras UDB** tanto como nosotros disfrutamos creándolo! ¡Feliz compra! 🛍️✨
+Esperamos que disfrutes el **Carrito de Compras UDB** 🛍️✨
