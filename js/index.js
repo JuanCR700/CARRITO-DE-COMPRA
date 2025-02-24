@@ -8,14 +8,39 @@ document.addEventListener("DOMContentLoaded", () => {
     const facturaContenido = document.getElementById("facturaContenido");
     const totalFactura = document.getElementById("totalFactura");
     const verCarritoBtn = document.getElementById("verCarrito");
+    const generarFacturaBtn = document.getElementById("generarFactura");
+
+    // Definir el inventario inicial
+    let inventario = {
+        "1": 10, // Hogwarts Legacy
+        "2": 10, // Ghost
+        "3": 10, // Mortal Kombat
+        "4": 10, // Stray
+        "5": 10, // SilentHill 2
+        "6": 10, // FC2025
+        "7": 10, // Resident Evil 4
+        "8": 10, // Spiderman 2
+        "9": 10, // Call Of Duty Black Ops 2
+        "10": 10 // Wukong
+    };
 
     // Manejadores para incrementar y decrementar la cantidad
     document.querySelectorAll(".sumar").forEach(btn => {
         btn.addEventListener("click", e => {
             const span = e.target.parentElement.querySelector(".cantidad");
             let currentQuantity = parseInt(span.textContent);
-            currentQuantity++;
-            span.textContent = currentQuantity;
+            const id = e.target.closest(".producto").querySelector(".agregar").getAttribute("data-id");
+            if (inventario[id] > currentQuantity) {
+                currentQuantity++;
+                span.textContent = currentQuantity;
+            } else {
+                Swal.fire({
+                    title: 'Inventario Insuficiente',
+                    text: 'No hay suficiente stock disponible.',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
         });
     });
 
@@ -107,6 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        const producto = carrito.find(item => item.id === id);
+                        inventario[id] += producto.cantidad; // Devolver la cantidad al inventario
                         carrito = carrito.filter(item => item.id !== id);
                         actualizarCarrito();
                         verCarritoBtn.click(); // Reabrir el modal para actualizar la vista
@@ -122,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let producto = carrito.find(item => item.id === id);
                 if (producto && producto.cantidad > 1) {
                     producto.cantidad--;
+                    inventario[id]++;
                     actualizarCarrito();
                     verCarritoBtn.click(); // Reabrir el modal para actualizar la vista
                 }
@@ -133,10 +161,18 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.addEventListener("click", (event) => {
                 const id = event.target.getAttribute("data-id");
                 let producto = carrito.find(item => item.id === id);
-                if (producto) {
+                if (producto && inventario[id] > 0) {
                     producto.cantidad++;
+                    inventario[id]--; // Restar una unidad del inventario
                     actualizarCarrito();
                     verCarritoBtn.click(); // Reabrir el modal para actualizar la vista
+                } else {
+                    Swal.fire({
+                        title: 'Inventario Insuficiente',
+                        text: 'No hay suficiente stock disponible.',
+                        icon: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             });
         });
@@ -164,6 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".eliminar").forEach(btn => {
             btn.addEventListener("click", (event) => {
                 const id = event.target.getAttribute("data-id");
+                const producto = carrito.find(item => item.id === id);
+                inventario[id] += producto.cantidad; // Devolver la cantidad al inventario
                 carrito = carrito.filter(item => item.id !== id);
                 actualizarCarrito();
             });
@@ -179,30 +217,40 @@ document.addEventListener("DOMContentLoaded", () => {
             const nombre = productoDiv.querySelector("img").alt;
             const cantidad = parseInt(productoDiv.querySelector(".cantidad").textContent);
 
-            Swal.fire({
-                title: '¿Está seguro?',
-                text: `Desea agregar ${cantidad} de ${nombre} al carrito.`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, agregar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let producto = carrito.find(item => item.id === id);
-                    if (producto) {
-                        producto.cantidad += cantidad;
-                    } else {
-                        const imagen = productoDiv.querySelector("img").src;
-                        carrito.push({ id, nombre, cantidad, precio, imagen, total: cantidad * precio });
+            if (inventario[id] >= cantidad) {
+                Swal.fire({
+                    title: '¿Está seguro?',
+                    text: `Desea agregar ${cantidad} de ${nombre} al carrito.`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, agregar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let producto = carrito.find(item => item.id === id);
+                        if (producto) {
+                            producto.cantidad += cantidad;
+                        } else {
+                            const imagen = productoDiv.querySelector("img").src;
+                            carrito.push({ id, nombre, cantidad, precio, imagen, total: cantidad * precio });
+                        }
+                        inventario[id] -= cantidad; // Restar la cantidad del inventario
+                        actualizarCarrito();
+                        Swal.fire(
+                            'Agregado!',
+                            `${cantidad} de ${nombre} ha sido agregado al carrito.`,
+                            'success'
+                        );
                     }
-                    actualizarCarrito();
-                    Swal.fire(
-                        'Agregado!',
-                        `${cantidad} de ${nombre} ha sido agregado al carrito.`,
-                        'success'
-                    );
-                }
-            });
+                });
+            } else {
+                Swal.fire({
+                    title: 'Inventario Insuficiente',
+                    text: 'No hay suficiente stock disponible.',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
         });
     });
 
